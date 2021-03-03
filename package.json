@@ -1,0 +1,19 @@
+{
+  "name": "fb-scrapper",
+  "version": "1.0.0",
+  "description": "Scrapes fb content",
+  "author": "Linas Rakauskas",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "cookies.json"
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "puppeteer": "^8.0.0"
+  }
+}
