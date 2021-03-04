@@ -1,10 +1,10 @@
-const cookies = require('../utils/cookies');
+import { getCookies } from '@utils/cookies';
 
-const scraperObject = {
+const loginPage = {
   url: 'https://facebook.com',
-  async init (browser){
-    this.pageInstance = await browser.newPage();
-    await this.pageInstance.setCookie(...cookies.getCookies());
+  async init (browserInstance){
+    this.pageInstance = await browserInstance.newPage();
+    await this.pageInstance.setCookie(...getCookies());
   },
   async acceptCookies(){
     if(await this.pageInstance.$('button[data-cookiebanner=accept_button]') !== null){
@@ -22,7 +22,6 @@ const scraperObject = {
   },
   async login(){
     if(await this.pageInstance.$('.UIPage_LoggedOut') !== null){
-      
       await this.pageInstance.type('#email', process.env.EMAIL);
       await this.pageInstance.type('#pass', process.env.PASSWORD);
       
@@ -30,9 +29,11 @@ const scraperObject = {
       
       await this.pageInstance.waitForNavigation();
       
-      console.log('Logged in, new page URL:', this.page.url());
+      console.log('Logged in, new page URL:', this.pageInstance.url());
+    }else{
+      console.log('User already logged in!');
     }
   }
 }
 
-module.exports = scraperObject;
+export default loginPage;

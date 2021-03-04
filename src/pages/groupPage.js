@@ -1,16 +1,14 @@
-const cookies = require('../utils/cookies');
+import { getCookies } from '@utils/cookies';
 
-const scraperObject = {
+const groupPage = {
   url: 'https://www.facebook.com/actual4chan2/photos',
   async init(browserInstance){
-    const browser = await browserInstance;
-
-    this.page = await browser.newPage();
-    await this.page.setCookie(...cookies.getCookies());
+    this.page = await browserInstance.newPage();
+    await this.page.setCookie(...getCookies());
 
     console.log(`Opening new page: ${this.url}`);
     await this.page.goto(this.url);
   },
 }
 
-module.exports = scraperObject;
+export default groupPage;

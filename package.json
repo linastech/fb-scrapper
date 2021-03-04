@@ -4,16 +4,36 @@
   "description": "Scrapes fb content",
   "author": "Linas Rakauskas",
   "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "nodemon index.js"
+    "build": "rimraf dist/ && babel ./src --out-dir dist --ignore ./node_modules --copy-files",
+    "start": "yarn build && node dist/index.js"
   },
   "nodemonConfig": {
+    "exec": "yarn start",
+    "watch": [
+      "./*",
+      ".babelrc.js"
+    ],
     "ignore": [
+      "**/dist/**",
       "cookies.json"
     ]
   },
   "dependencies": {
+    "@babel/runtime": "^7.13.9",
     "dotenv": "^8.2.0",
     "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.10.4",
+    "@babel/core": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.13.9",
+    "@babel/preset-env": "^7.10.4",
+    "babel-plugin-add-module-exports": "^1.0.4",
+    "babel-plugin-module-resolver": "^4.0.0"
   }
 }

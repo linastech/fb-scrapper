@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-exports.getCookies = () => {
+const getCookies = () => {
   let cookies;
 
   if(fs.existsSync(process.env.COOKIES_PATH)) {
@@ -13,9 +13,14 @@ exports.getCookies = () => {
   return cookies;
 }
 
-exports.saveCookies = async(pageInstance) => {
+const saveCookies = async(pageInstance) => {
   const cookies = await pageInstance.cookies();
   const cookieJson = JSON.stringify(cookies);
 
   fs.writeFileSync(process.env.COOKIES_PATH, cookieJson);
+}
+
+export {
+  getCookies,
+  saveCookies
 }
