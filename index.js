@@ -1,9 +1,12 @@
 require('dotenv').config();
 const browserObject = require('./src/browser');
-const scraperController = require('./src/pageController');
+const authController = require('./src/controllers/auth');
+const groupPageController = require('./src/controllers/groupPage');
 
 //Start the browser and create a browser instance
 let browserInstance = browserObject.startBrowser();
 
-// Pass the browser instance to the scraper controller
-scraperController(browserInstance)
+//handle authentication
+authController(browserInstance);
+//open group page to be scrapped
+groupPageController(browserInstance);
